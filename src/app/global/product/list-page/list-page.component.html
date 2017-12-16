@@ -1,0 +1,43 @@
+<ul *ngIf="products" class="category-list">
+  <li class="category-item" *ngFor="let item of products">
+    <div class="border-item">
+      <span class="sale-box" [saleProduct]="item.properties">
+        <span class="label-sale">SALE</span>
+      </span>
+      <a [routerLink]="['/',item.category.title,item.id]" (click)="topPage()">
+        <div class="category-item-picture" *ngIf="item.properties[0].images.length==0 ||item.properties.length==0">
+          <img src="http://cdn.shopify.com/s/files/1/1137/0048/t/2/assets/slideshow_image_1.jpg?1928721178739775374" class="image-size" >
+          
+        </div>
+        <div class="category-item-picture" *ngIf="item.properties[0].images.length!=0">
+          <cl-image class="image-size" public-id="{{item.properties[0].images[0].image}}">
+          </cl-image>
+        </div>
+      </a>
+      <hr class="small">
+      <div class="category-item-info">
+        <div class="product-name">
+          <p *ngIf="item.name">{{item.name}}</p>
+        </div>
+        <div class="product-price">
+          <p>Sell by <i>{{item.shop.name}}</i></p>
+          <!-- <span class="old-price">$500</span> -->
+          <span class="new-price">${{item.properties[0].price}}</span>
+        </div>
+      </div>
+      <div class="add-to-cart-btn">
+        <a class="add-to-cart" (click)="add_to_cart(item, 1)">
+          <i class="now-ui-icons shopping_cart-simple"></i>
+          ADD TO CART
+        </a>
+        <div class="rating">
+          <star-review [type]=0 [rate]="item.rating.toString()"></star-review>
+        </div>
+        <div class="wish-list">
+          <button class="btn"><i class="fa fa-heart"> Wish list</i></button>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+      

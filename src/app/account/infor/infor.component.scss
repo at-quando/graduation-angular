@@ -1,0 +1,101 @@
+.infor-user {
+  float: left;
+  .label-info{
+    width: 20%;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+  .radio{
+    padding-left: 20%;
+  }
+  .btn {
+    margin-top: 20px;
+    margin-left: 40%;
+  }
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.wish-list-contain {
+  float: left;
+  .wish-list {
+    list-style-type: none;
+    padding-left: 0;
+    li{
+      padding: 20px 0;
+      h6{
+        font-size: 1vw;
+      }
+      p{
+        margin-bottom: 0;
+        font-size: 0.8vw;
+      }
+    }
+
+    li:hover {
+      box-shadow: 0 0 3px grey;
+    }
+  }
+  .margin-right {
+    float: right;
+  }
+  .radio-btn {
+    padding-right: 40px;
+  }
+}
+
+.avatar {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: inline;
+}
+
+.content-avatar {
+  * {
+    vertical-align: top;
+  }
+}
+
+.change {
+  margin-top: 5px;
+  .change-avatar {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.avatar-user {
+  width: 150px !important;
+  height: auto !important;
+}
+
+.clr::After {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  margin-left: 0 !important;
+  margin-top: 1px !important;
+  margin-bottom: 5px !important;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
+}

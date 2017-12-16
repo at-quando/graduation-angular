@@ -1,0 +1,88 @@
+<review-shop *ngIf="isReviewDisplay" (closeModal)="closeEvent($event)" ></review-shop>
+<div *ngIf="shop">
+  <div class="shop-cover-picture">
+    <img src={{shop.image}} class="cover-picture">
+    <div class="shop-main-info">
+      <h4>{{shop.name}}</h4>
+      <hr class="small">
+      <p>{{shop.slogan}}</p>
+    </div>
+  </div>
+  <div class="container-side">
+    <div class="row">
+      <nav class="col-sm-3" >
+        <div class="shop-navigation" >
+          <h4>{{shop.name}}</h4>
+          <ul>
+            <li class="actived"><a href={{url}}#product>Products</a></li>
+            <li><a (click)="isReviewDisplay=true">Review</a></li>
+            <li><a href={{url}}#location>Location</a></li>
+            <li><a href={{url}}#information>Infomation</a></li>
+          </ul>
+        </div>
+      </nav>
+      <span class="anchor" id="product"></span>
+      <div class="col-sm-9 padding-right">
+        <h4>PRODUCTS</h4>
+        <div class="category-in-products">
+          <div class="category-container">
+            <list-page></list-page>
+          </div>
+        </div>
+        <pagination ></pagination>
+        <hr class="small">
+        <span class="anchor" id="review"></span>
+        <div  class="review" *ngIf="reviewers">
+          <h4>REVIEW</h4>
+          <div *ngFor="let review of reviewers" class="item-review">
+              <p>Total: {{review.total}}</p>
+              <div class="rating" [attr.data-rate]="review.quality">
+                <div class="label-col">Quality:</div><div class="col-m col-v"></div>
+              </div>
+              <div class="rating" [attr.data-rate]="review.warranty">
+                <div class="label-col">Warranty:</div><div class="col-m col-v"></div>
+              </div>
+              <div class="rating" [attr.data-rate]="review.delivery">
+                <div class="label-col">Delivery:</div><div class="col-m col-v"></div>
+              </div>
+              <div class="rating" [attr.data-rate]="review.service">
+                <div class="label-col">Service:</div><div class="col-m col-v"></div>
+              </div>
+              <p><b>{{review.user.name}}</b></p>
+              <i>{{review.review_shop}}</i>
+            </div>
+          <!-- <div class="rating" [attr.data-rate]="4">
+            <div class="col-m col-v"></div>
+          </div>
+          <div class="rating" [attr.data-rate]="5">
+            <div class="col-m col-v"></div> -->
+          <!-- </div> -->
+        </div>
+        <hr class="small">
+        <span class="anchor" id="location"></span>
+        <div  class="location">
+          <h4>MAP</h4>
+          <div id="map">
+          </div>
+        </div>
+        <hr class="small">
+        <span class="anchor" id="information"></span>
+        <div  class="full-info">
+          <div class="meta">
+            <h4>INFOMATION</h4>
+            <h6>{{shop.name}}</h6>
+            <p><span>Address:</span> {{shop.address}}</p>
+            <p><span>Telephone:</span> 123123123</p>
+            <p>
+              <span>Description:</span> 
+              {{shop.description}}
+            </p>
+          </div>
+          <div class="logo">
+            <img src={{shop.logo}}>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

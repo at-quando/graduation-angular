@@ -1,0 +1,135 @@
+<div *ngIf="product">
+  <img class="sale-label" src="../../../../assets/img/sale.png" [saleProductDetails]="product.properties">
+  <div class="container-side">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="product-details">
+          <!--product-details-->
+          <div class="col-sm-7" style="float: left">
+            <div class="view-product text-center" *ngIf="product.properties[0].images.length!=0">
+              <div class="aside-image">
+                <cl-image class="small-image" public-id="{{image.image}}" alt="" *ngFor="let image of product.properties[0].images" (click)="toggleImage(image.image)">
+                </cl-image>
+              </div>
+              <div class="wrapper ">
+                <cl-image class="big-image drift-demo-trigger" data-zoom="" public-id="{{product.properties[0].images[0].image}}" >
+                </cl-image>
+                <div class="detail" >
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5" style="float: left">
+            <div class="product-information">
+              <div>
+                <!--/product-information-->
+                <h3>{{product.name}}</h3>
+                <p><i>{{category}}</i></p>
+                <hr class="small">
+              </div>
+              <div class="basic-info">
+                <div class="basic-info-1">
+                  <div id="productprice">
+                    <div class="price" >
+                      <h5>${{product.properties[0].price}}</h5>
+                      <span>123</span>
+                    </div>
+                    <div class="price" >
+                      <h5>${{product.properties[0].price}}</h5>
+                      <span>123</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="basic-info-2">
+                  <div class="info">
+                    <p>Availability: <b>In Stock</b></p>
+                    <p>Condition: <b>New</b></p>
+                    <p>Brand: <b>{{product.brand.branch}}</b></p>
+                  </div>
+                  <div class="quantity text-center">
+                    <label>Quantity:</label>
+                    <div class="input-group form-group-no-border ">
+                      <a class="input-group-addon" (click)="minusQuantity()">
+                        <i class="now-ui-icons ui-1_simple-delete"></i>
+                      </a>
+                      <input type="text" class="form-control" [value]="quantity" >
+                      <a class="input-group-addon" (click)="plusQuantity()">
+                        <i class="now-ui-icons ui-1_simple-add"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="action text-center">
+                <p>Please choose all property of the product before buy it!</p>
+                <button type="button" class="add-to-cart btn btn-fefault btn-primary cart" (click)="addToCart(product,$event)">
+                  <i class="fa fa-shopping-cart"> </i>
+                    ADD TO CART
+                </button>
+                <button type="button" class="btn btn-default btn-compared" (click)="addToCompared(product,$event)">
+                  <i class="fa fa-arrows-h"> </i>
+                    COMPARE IT
+                </button>
+              </div>
+              <hr class="small">
+            </div>
+            <div class="property-product">
+              <div class="property-combobox">
+                <p>● Storage/ Size:</p>
+                <ul class="property-list">
+                  <div *ngFor="let i = index; let property of productAnalyze |keys">
+                    <li class="item active" *ngIf="i==0" (click)="showColor(this.property)">
+                      <a><b>{{property}}</b></a>
+                    </li>
+                    <li class="item" *ngIf="i!=0" (click)="showColor(property)">
+                      <a>{{property}}</a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+              <div class="property-color">
+                <p>● Color we have:</p>
+                <div id="propertycolorist">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="small">
+        <div>
+          <h3>INFORMATION OF PRODUCT</h3>
+          <div class="rating">
+            <h6>Rating of this product</h6>
+            <div style="float: left">
+              <star-review [type]=0 [rate]="product.rating.toString()"></star-review><br>
+              <span>People: {{product.number_review}}</span><br>
+              <span *ngIf="!transfer.meta">Please log in to review this products.</span>
+              <div *ngIf="transfer.meta">
+                <span *ngIf="rated.rated != 0">You rated this product: {{rated.rated}} points</span>
+                <span *ngIf="rated.rated == 0">You have not rated for this products.</span><br>
+                <h6>Rate for it here:</h6> 
+                <star-review [type]=1 [rate]="personal.toString()" (result)="setRated($event)"></star-review><br>
+              </div>
+            </div>
+            <p class="rate-box" style="float: left">{{product.rating.toFixed(1)}}/5</p>
+          </div>
+          <h6>Description</h6>
+          <p>{{product.description}}</p>
+        </div>
+        <hr class="small">
+        <div>
+          <h3>RECOMMEND PRODUCTS</h3>
+          <div class="category-in-products">
+            <div class="category-container">
+              <list-page></list-page>
+            </div>
+          </div>
+        </div>
+        <hr class="small">
+        <div>
+          <review></review>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

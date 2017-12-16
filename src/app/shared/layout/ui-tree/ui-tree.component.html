@@ -1,0 +1,21 @@
+<ul id="list" class="list-group">
+  <li class="list-li" *ngFor="let k of obj| keys">
+    <div *ngIf="obj.length">
+      <div *ngIf="!obj[k].title">
+        <div *ngFor="let m of obj[k]| keys">
+          <a [routerLink]="['../',m | lowercase]"> {{m}}</a>
+          <app-ui-tree [key]="m" [data]="obj[k][m]"></app-ui-tree>
+        </div>
+      </div>
+      <div *ngIf="obj[k].title">
+        <a [routerLink]="['../',obj[k].title | lowercase]" [queryParams]="{ id: obj[k].id}"> {{obj[k].title}}</a>
+      </div>
+    </div>
+    <div *ngIf="!obj.length">
+      <div>
+        <a [routerLink]="['../',k | lowercase]"> {{k}}</a>
+        <app-ui-tree [key]="k" [data]="obj[k]"></app-ui-tree>
+      </div>
+    </div>
+  </li>
+</ul>

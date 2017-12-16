@@ -1,0 +1,37 @@
+<div class="justify-content-center" >
+  <ul class="pagination">
+  	<li class="page-item">
+      <a class="page-link" *ngIf="pageActive!=1" [routerLink]="['../',name,{page: 1, brand_id: brandId}]" aria-label="Previous">
+        First
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="pageActive!=1" [routerLink]="['../',name,{page: pageActive-1, brand_id: brandId}]" aria-label="Previous">
+        <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+      </a>
+    </li>
+    <div *ngFor="let page of pages">
+  		<li class="page-item"  *ngIf="page!=pageActive">
+  			<a class="page-link" [routerLink]="['../',name,{page: page, brand_id: brandId}]"  >
+  			{{page}}
+  			</a>
+  		</li>
+  		<li class="page-item active"  *ngIf="page==pageActive">
+  			<a class="page-link" [routerLink]="['../',name,{page: page, brand_id: brandId}]"  >
+  			{{page}}
+  			</a>
+  		</li>
+  	</div>
+    <li class="page-item">
+      <a class="page-link" *ngIf="pageActive<pageNumber" [routerLink]="['../',name,{page: pageActive+1, brand_id: brandId}]" aria-label="Next">
+        <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="pageActive<pageNumber" [routerLink]="['../',name,{page: pageNumber, brand_id: brandId}]" aria-label="Previous">
+        Last
+      </a>
+    </li>
+  </ul>
+</div>
+	

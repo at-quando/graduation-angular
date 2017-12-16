@@ -1,0 +1,18 @@
+<div class="container-side">
+  <div class="row">
+    <div class="col-sm-3 side-bar">
+      <h4>Account Management</h4>
+      <ul class="list-user-action">
+        <li class="active"><a [routerLink]="['/customer/info']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Your Information</a></li>
+        <li><a [routerLink]="['/customer/history']">Completed Orders</a></li>
+        <li >Your Wish List</li>
+        <li>Your review</li>
+      </ul>
+    </div>
+    <div class="col-sm-9 infor-user">
+      <!-- <app-user-infor></app-user-infor> -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

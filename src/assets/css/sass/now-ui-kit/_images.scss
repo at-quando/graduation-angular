@@ -1,0 +1,83 @@
+img{
+    max-width: 100%;
+    border-radius: 1px;
+}
+.img-raised{
+    box-shadow: $box-shadow-raised;
+}
+.img-respondsive{
+	max-width: inherit;
+	height: auto;
+	transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
+}
+
+.effect {
+	text-align: center;
+	>a{
+		 display: block; 
+		 width: 100%; 
+		 position: relative; 
+		 z-index: 2;
+		 text-decoration: none;
+		 color: #444;
+		 box-sizing: border-box;  
+		 -moz-box-sizing: border-box;  
+		 -webkit-box-sizing: border-box; 
+		}
+	}
+img{
+	z-index: -4;
+}
+.effect>a:after{
+	 content: "";
+  left: 30%; 
+  top: 50%;
+	width: 40%;
+	height: 40%;
+	transform: translateY(-50%);
+	vertical-align: middle;  
+  position: absolute; 
+  transition: all 0.3s ease 0s; 
+  z-index: 3;
+  background: rgba(255,255,255,0.3);
+	opacity: 0;
+}
+.effect>a:before{
+	 content: "";
+  left: 30%; 
+  top: 50%;
+	width: 40%;
+	height: 40%;
+	transform: translateY(-50%);
+	vertical-align: middle;  
+  position: absolute; 
+  transition: all 0.3s ease 0s; 
+  z-index: 3;
+  background: rgba(255,255,255,0.3);
+	opacity: 0;
+}
+
+
+
+.effect>a:hover:after{
+	-webkit-transition: 0.6s ease-out;
+  transition:  0.6s ease-out;
+	left: 15%;
+	opacity: 1;
+	width: 70%;
+	height: 90%; 
+}
+.effect>a:hover:before{
+	-webkit-transition: 0.6s ease-out;
+  transition:  0.6s ease-out;
+	left: 5%;
+	opacity: 1;
+	width: 90%;
+	height: 70%; 
+}
+
+
+
+

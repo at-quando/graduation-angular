@@ -1,0 +1,23 @@
+<div class="left-sidebar">
+  <div>
+    <h4 class="title-font">CATEGORY</h4>
+    <hr class="small">
+  </div>
+</div>
+<div class="panel-group category-products" id="accordian">
+  <ui-tree-aside [currentTree]="path" [data]="mainCategory" id="cat-tree"></ui-tree-aside>
+</div>
+<div class="brands_products">
+  <h4 class="title-font">BRANDS</h4>
+  <hr class="small">
+  <div class="brands-name">
+    <ui-tree-brand-aside></ui-tree-brand-aside>
+  </div>
+</div>
+<div class="price-range">
+  <!--price-range-->
+  <h4 class="title-font">PRICE</h4>
+  <hr class="small">
+  <div id="sliderDouble" class="slider slider-info"></div>
+  <div id="sliderRegular" class="slider"></div>
+</div>

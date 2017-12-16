@@ -1,0 +1,53 @@
+<div class="review-box" >
+	<h4>REVIEW</h4>
+	<div class="rating">
+	</div>
+	<div>
+    <div class="form-group has-success">
+    	<form (ngSubmit)="submitReview(title,content)" >
+        <input type="text" placeholder="add your Title" class="form-control form-control-success" name="title" [(ngModel)]="title">
+        <textarea class="form-control text-content" placeholder="Here can be your nice text" rows="5" name="content" [(ngModel)]="content"></textarea>
+        <button type="submit" [disabled]="check==false" class="btn btn-primary margin-right btn-submit">Submit</button>
+      </form>
+    </div>
+		<div class="review-comment">
+			<ul *ngIf="reviews">
+				<li class="review-item" *ngFor="let review of reviews.reverse()">
+					<div class="avatar">
+						<cl-image public-id={{review.user.avatar}} class="comment-avatar"></cl-image>
+					</div>
+					<div class="comment-info">
+						<div id="action" class="dropdown dropdown-action" *ngIf="this.current_user && this.review.user.id==this.current_user.user_id">
+					    <a data-toggle="dropdown" id="navbarDropdownMenuLink1">
+					    	<i class="now-ui-icons arrows-1_minimal-down"></i>
+					    </a>
+					    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+					      <a class="dropdown-item" (click)="enableEditForm(1)">Edit</a>
+					      <a class="dropdown-item" (click)="deleteComment(this.review.id)">Delete</a>
+					    </ul>
+						</div>
+						<div id="content">
+							<h5>{{review.title}}</h5>	
+							<span>review by</span>
+							<i>{{review.user.name}}</i> 
+							<p>{{review.created_at | momentConvert}}</p>
+							<div>
+								<div id={{review.id}} class="content">
+									{{review.content}}
+									<button *ngIf="review.content.length>680" class="read-more" (click)="moreText(review.id)">...read more</button>
+								</div>
+							</div>
+						</div>
+							<form #f="ngForm"  id="form-edit" (ngSubmit)="editContentAction(this.review.id,f.value,f.dirty)">
+								<input type="text" value={{review.title}} class="form-control form-control-success" name="editTitle" [(ngModel)]="review.title">
+								<textarea [(ngModel)]="review.content" name="editContent" class="form-control text-content" value={{review.content}} rows="3" ></textarea>
+								<button class="btn btn-default btn-sm margin-right" (click)="enableEditForm(0)">Cancel</button>
+								<button type="submit" class="btn btn-info btn-sm margin-right">EDIT</button>
+							</form>
+							<hr class="small">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

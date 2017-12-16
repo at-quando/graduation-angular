@@ -1,0 +1,30 @@
+<div *ngFor="let k of mainCategory| keys" id="cat-aside">
+  <div class="panel panel-default" *ngIf="!mainCategory.length">
+    <div class="panel-heading">
+      <h4 class="title-panel">
+        <a data-toggle="collapse" href=#{{k|replaceBlankSpace}}>
+          {{k}}
+          <i id="plus" class="now-ui-icons ui-1_simple-add" ></i>
+        </a>
+      </h4>
+      <div id={{k|replaceBlankSpace}} class="panel-collapse collapse">
+        <aside-tree [datas]="mainCategory[k]" class="panel-body"></aside-tree>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mainCategory.length">
+    <ul>
+      <div *ngIf="mainCategory[k].title">
+        <li><a [routerLink]="['../',mainCategory[k].title | lowercase]" [queryParams]="{ id: mainCategory[k].id}"> {{mainCategory[k].title}}</a></li>
+      </div>
+      <div *ngIf="!mainCategory[k].title">
+        <li *ngFor="let m of mainCategory[k]| keys">
+          <a [routerLink]="['../',m | lowercase]">
+            {{m}}
+          </a>
+          <aside-tree [datas]="mainCategory[k][m]" class="panel-body"></aside-tree>
+        </li>
+      </div>
+    </ul>
+  </div>
+</div>

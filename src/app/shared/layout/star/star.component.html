@@ -1,0 +1,14 @@
+<div *ngIf="type==0" class="rating" [attr.data-rate]="rate">
+  <i class="fa fa-star star-1"></i>
+  <i class="fa fa-star star-2"></i>
+  <i class="fa fa-star star-3"></i>
+  <i class="fa fa-star star-4"></i>
+  <i class="fa fa-star star-5"></i>
+</div>
+<div *ngIf="type==1" class="rating rating-self" [attr.data-rate]="rate">
+  <i class="fa fa-star star-5" (click)="getRating(5)"></i>
+  <i class="fa fa-star star-4" (click)="getRating(4)"></i>
+  <i class="fa fa-star star-3" (click)="getRating(3)"></i>
+  <i class="fa fa-star star-2" (click)="getRating(2)"></i>
+  <i class="fa fa-star star-1" (click)="getRating(1)"></i>
+</div>

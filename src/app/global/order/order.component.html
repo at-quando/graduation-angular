@@ -1,0 +1,203 @@
+<div class="process-box">
+  <h5>Process Order</h5>
+  <div class="stepwizard">
+    <div class="stepwizard-row">
+      <div class="stepwizard-step">
+        <button type="button" id="btn-1" class="btn btn-warning btn-circle" (click)="changeOrderComp(1)">1</button>
+        <p>Product Order</p>
+      </div>
+      <div class="stepwizard-step">
+        <button type="button" id="btn-2" class="btn btn-circle" (click)="changeOrderComp(2)" disabled >2</button>
+        <p>Information for ordering</p>
+      </div>
+      <div class="stepwizard-step">
+        <button type="button" id="btn-3" class="btn btn-default btn-circle" (click)="changeOrderComp(3)" disabled>3</button>
+        <p>Transaction & Payment</p>
+      </div> 
+    </div>
+  </div>
+</div>
+<hr class="small">
+<div class="container-side product" *ngIf="comp==1">
+  <h5>My order</h5>
+  <div class="row">
+    <div class="col-sm-9 orders">
+      <table class="table-orders table">
+        <tr>
+          <th class="product">{{numberItem()}} PRODUCTS</th>
+          <th class="price">PRICE</th>
+          <th class="number">NUMBER</th>
+        </tr>
+        <tr *ngIf="numberItem()==0">
+          <p>You don't have any products, please choice first!!!</p>
+        </tr>
+        <tr class="item" *ngFor="let orderItem of products">
+          <td class="item-order">
+            <div class="img">
+              <img class="" src="http://res.cloudinary.com/asian-tech/image/upload/v1505877399/{{orderItem.properties[0].images[0].image}}" alt="">
+            </div>
+            <div class="title">
+              <a [routerLink]="['/','products',orderItem.id]">
+                {{orderItem.name}}
+              </a>
+              <div>
+                Color: {{orderItem.properties[0].color}} 
+                <div *ngIf="orderItem.properties[0].size">Size: {{orderItem.properties[0].size}}</div>
+                <div *ngIf="orderItem.properties[0].storage">Storage: {{orderItem.properties[0].storage}}</div>
+              </div>
+            </div>
+          </td>
+          <td *ngIf="!orderItem.properties[0].discount">
+            <h4>${{orderItem.properties[0].price}}</h4>
+          </td>
+          <td *ngIf="orderItem.properties[0].discount">
+            <h6 class="old-price">${{orderItem.properties[0].price}}</h6>
+            <h4>${{(orderItem.properties[0].price*(1-orderItem.properties[0].discount.sale)).toFixed(2)}}</h4>
+          </td>
+          <td>
+            <div class="text-center">
+              <button class="btn-number" (click)="minusQuantity(orderItem)">-</button>
+              <input type="number" class="number-product" value={{orderItem.quantity}}>
+              <button class="btn-number" (click)="plusQuantity(orderItem)">+</button>
+            </div>
+          </td>
+          <div class="delete">
+            <a (click)="deleteOrderItem(orderItem)">x</a>
+          </div>
+        </tr>
+      </table>
+    </div>
+    <div class="col-sm-3 payment">
+      <h6>Order information</h6>
+      <hr class="mar">
+      <span>Price:</span> <span class="price-info">${{getTotal()}}</span>
+      <hr class="mar">
+      <span>Price(Discount):</span> <span class="price-info">${{getTotalDiscount()}}</span> 
+      <hr class="mar">
+      <span>Total(Coupon):</span> <span class="price-info">${{getTotalCoupon()}}</span> 
+      <hr class="mar">
+      <button type="button" class="btn btn-primary" (click)="goToNextComp()" [disabled]="products==null ||products.length==0" >Payment</button>
+      <hr class="mar">
+      <input class="coupon-box" placeholder="Enter coupon..." [(ngModel)]="coupon">
+      <button class="btn accept-btn" [disabled]="!coupon" (click)="checkCoupon(coupon)">Accept</button>
+      <hr class="mar">
+      <p id="couponText"></p>
+    </div>
+  </div>
+</div>
+<div class="container-side info"  *ngIf="comp==2">
+  <h5>Information order</h5>
+  <ul class="col-sm-12 address-list">
+    <p>Choose available address you used to order:</p>
+    <li class="address-item" *ngFor="let item of listReceiver.orders; let i = index">
+      <b>{{i}}{{item.receiver}}</b>
+      <p>Address: {{item.address}}</p>
+      <p>Phone: {{item.phone}}</p>
+      <button class="btn btn-success" (click)="chooseReceiver(i)">Choose it</button>
+      <button class="btn btn-danger" (click)="deleteReceiver(i)">Delete</button>
+    </li>
+  </ul>
+  <div>
+    <h6>Want to add new address?</h6>
+    <form #f="ngForm" class="form" novalidate>
+      <div>
+        <label class="label-info">Name of Receiver:</label>
+        <input  class="col-sm-3" type="text" name="name" [(ngModel)]="receiver.name" required>
+      </div>
+      <div>
+        <label class="label-info">Address to delivery:</label>
+        <input  class="col-sm-3" type="text" name="phone" [(ngModel)]="receiver.phone" required>
+      </div>
+      <div>
+        <label class="label-info">Phone to contact:</label>
+        <input  class="col-sm-3" type="text" name="address" [(ngModel)]="receiver.address" required>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="goToNextComp()" [disabled]="!f.valid">Add</button>
+    </form>
+  </div>
+</div>
+<div class="transaction"  *ngIf="comp==3">
+  <div class="col-sm-3 list-payment">
+    <h5>Payment order</h5>
+    <div class="col-sm-9">
+      <input type="radio" name="orderType" id="cod" [(ngModel)]="typePayment" value='0'>
+      <label class="radio-btn" for="cod">
+          COD delivery
+      </label><br>
+      <input type="radio" name="orderType" id="atm" [(ngModel)]="typePayment" value='1'>
+      <label class="radio-btn" for="atm">
+          ATM/ Internet Banking
+      </label><br>
+      <input type="radio" name="orderType" id="visa" [(ngModel)]="typePayment" value='2'>
+      <label class="radio-btn" for="visa">
+          Visa/ Master Card/ Paypal
+      </label>
+    </div>
+  </div>
+  <div class="col-sm-6 box-payment">
+      <p *ngIf="!typePayment">
+          Choose type of Payment first!
+      </p>
+    <div *ngIf="typePayment==0">
+      <p class="cod-info">
+        The products will be deliveried to your address. And you will purchase for shipper.
+        There is no offer for this transaction!
+      </p>
+      <button class="btn btn-info" (click)="codPayment()">Finish</button>
+    </div>
+    <div *ngIf="typePayment==1">
+      <p class="cod-info">Choose the bank you want to pay:</p>
+      <img src="https://cdn.tgdd.vn/Files/2014/08/13/559747/ngan-hang-123-pay.jpg">
+      <button class="btn btn-info">Finish</button>
+    </div>
+    <div *ngIf="typePayment==2">
+      <p class="cod-info">Choose the type of internet transaction you want to pay:</p>
+      <input type="radio" name="payment-type" id="visa-type" [(ngModel)]="trans.type" value='visa'>
+      <label class="radio-btn" for="visa-type">
+        <img class="pay-pic"  src="https://www.lebanonfcu.org/wp-content/uploads/2016/12/visa-logo.png">
+      </label>
+      <input type="radio" name="payment-type" id="master-type" [(ngModel)]="trans.type" value='master'>
+      <label class="radio-btn" for="master-type">
+        <img class="pay-pic" src="http://investadvocate.com.ng/wp-content/uploads/2017/09/Mastercard.jpg">
+      </label>
+      <form #fTrans="ngForm" class="form">
+        <p>Your name:</p>
+        <div>
+          <label class="label-info col-sm-3">Firstname:</label>
+          <input  class="col-sm-5" type="text" name="fname" [(ngModel)]="trans.firstname">
+        </div>
+        <div>
+          <label class="label-info col-sm-3">Lastname:</label>
+          <input  class="col-sm-5" type="text" name="lname" [(ngModel)]="trans.lastname">
+        </div>
+        <p>Information of your card:</p>
+        <div>
+          <label class="label-info col-sm-3">Card number:</label>
+          <input  class="col-sm-5" type="text" name="cardnum" [(ngModel)]="trans.cardNum">
+        </div>
+        <div>
+          <label class="label-info col-sm-3">Expired Date:</label>
+          Month: <input  class="col-sm-1" type="text" name="expiredMonth" [(ngModel)]="trans.expired.month">
+          Year: <input  class="col-sm-1" type="text" name="expiredYear" [(ngModel)]="trans.expired.year">
+        </div>
+        <div>
+          <label class="label-info col-sm-3">CVV:</label>
+          <input  class="col-sm-5" type="text" name="cvv" [(ngModel)]="trans.cvv">
+        </div>
+      </form>
+      <label class="col-sm-3"></label>
+      <button class="btn btn-info col-sm-5" (click)="payment()">Finish</button>
+    </div>
+  </div>
+  <div class="col-sm-3 summary">
+    <h5>Summary</h5>
+    <div>
+      Total Money: <b>${{getTotalCoupon()}}</b>.<br>
+      Your order have <b>{{numberItem()}} products</b>.<br><br>
+      <h6>Order will be delivery to:</h6>
+      {{receiver.name}}<br>
+      {{receiver.phone}}<br>
+      {{receiver.address}}<br>
+    </div>
+  </div>
+</div>

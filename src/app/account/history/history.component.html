@@ -1,0 +1,79 @@
+<div class="col-sm-12 padding-right infor-user">
+  <h5>Your History Order</h5>
+  <p *ngIf="history == null || history.length == 0">
+    You don't have history, please order first!
+  </p>
+  <ul *ngIf="history" class="orders-list">
+    <li class="order-detail" *ngFor="let obj of history">
+      <p class="order-id">
+        ID order: {{obj.id}}
+      </p>
+      <div class="order">
+        <div class="inline-infor clr">
+          <p class="status" style="color: red">
+            Status: {{obj.status}}
+          </p>
+          <p class="date-order">
+            Date order: {{obj.created_at}}
+          </p>
+        </div>
+        <p *ngIf="!obj.purchased_at" style="color: orange" class="receiver">
+          METHOD: Cash On Delivery (COD)
+        </p>
+        <p *ngIf="obj.purchased_at" style="color: orange" class="receiver">
+          METHOD: Paid
+        </p>
+        <p class="receiver">
+          Receiver: {{obj.receiver}}
+        </p>
+        <p class="address">
+          Address: {{obj.address}}
+        </p>
+        <p class="phone">
+          Phone: {{obj.phone}}
+        </p>
+        <p class="detail-order">
+          <a (click)="showDetailOrder(obj.id)">Detail order <i class="fa fa-sort-down"></i></a>
+        </p>
+        <table class="table-orders table-orders{{obj.id}}">
+          <tr>
+            <th class="product">{{obj.order_items.length}} PRODUCTS</th>
+            <th class="price">PRICE</th>
+            <th class="quantity">QUANTITY</th>
+            <th class="number">TOTAL</th>
+          </tr>
+          <tr class="item" *ngFor="let order_items of obj.order_items">
+            <td class="item-order">
+              <div class="img">
+                <!-- <img class="" src="{{order_items.product.properties[0].images[0].image}}" alt=""> -->
+                <cl-image public-id="{{order_items.product.properties[0].images[0].image}}">
+                </cl-image>
+              </div>
+              <div class="title">
+                <a [routerLink]="['/','products',order_items.product.id]">
+                  {{order_items.product.name}}
+                </a>
+              </div>
+            </td>
+            <td>
+              <h5>${{order_items.product.properties[0].price}}</h5>
+            </td>
+            <td class="center">
+              {{order_items.quantity}}
+            </td>
+            <td class="center">
+              ${{order_items.total}}
+            </td>
+          </tr>
+          <tr class="total">
+            <td colspan=4>
+              <div>
+                <span class="total-label">TOTAL:</span> <span *ngIf="obj.total" class="total-price">${{obj.total}}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  </ul>
+</div>

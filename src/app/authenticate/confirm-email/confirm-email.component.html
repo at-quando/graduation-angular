@@ -1,0 +1,24 @@
+<div class="text-center">
+	<div *ngIf="success">
+		<h4>VERIFY EMAIL SUCCESSFUL</h4>
+		<p>
+			Congratulations.
+			You still verified your account by email.
+			Let's visit our online ordering website!
+		</p>
+		<p>
+			The browser will direct to home page now. If not you can click the button below.
+		</p>
+		<a [routerLink]="['']"><h5>HOME PAGE</h5></a>
+	</div>
+	<div *ngIf="!success">
+		<p>
+			FAILED! Something went wrong.
+			Your token is not valid.
+			Try to send token again. Let's visit our online ordering website!
+		</p>
+		<p>
+			<a [routerLink]="['']"><h5>HOME PAGE</h5></a>
+		</p>
+	</div>
+</div>

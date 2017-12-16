@@ -1,0 +1,158 @@
+h4 {
+	font-weight: 800;
+	font-size: 30px;
+}
+.anchor{
+  display: block;
+  height: 115px; /*same height as header*/
+  margin-top: -115px; /*same height as header*/
+  visibility: hidden;
+}
+.shop-cover-picture {
+	position: relative;
+	max-height: 400px;
+	overflow: hidden;
+	.cover-picture {
+		transform: translateY(-30%);
+		width: 100%;
+		z-index: 5;
+	}
+	.shop-main-info{
+		position: absolute;
+		bottom: 50%;
+		right: 10%;
+		z-index: 10;
+		color: white;
+		text-transform: capitalize;
+		font-size: 20px;
+		hr {
+			background-color: white;
+		}
+		p {
+			font-size: 15px;
+		}
+	}
+}
+.shop-navigation {
+	position: fixed;
+	top: 100px;
+	width: 15%;
+	ul {
+		padding: 0;
+		list-style-type: none;
+		li {
+			padding: 10px 20px;
+			border: 1px solid grey;
+			a{
+				color: black;
+				font-size: 15px;
+
+			}
+		}
+		li:hover{
+			background-color: grey;
+			a{ 
+				color: white;
+			}
+		}
+		.actived {
+			background-color: grey;
+			a{ 
+				color: white;
+			}
+		}
+	}
+}
+.location{
+	margin-bottom: 20px;
+	height: 500px;
+	// .google-map {
+	// 	width: 70%;
+	// 	height: 70%;
+	// }
+	#map {
+		width: 70%;
+		height: 70%;
+	}
+}
+.full-info {
+	overflow: hidden;
+	padding-bottom: 100px;
+	span{
+		font-weight: 800;
+	}
+	.meta {
+		float: left;
+		width: 60%;
+		p{
+			margin-bottom: 0;
+		}
+	}
+	.logo {
+		float: right;
+		width: 20%;
+		height: 100%;
+		img{
+			vertical-align: middle;
+			width: 100%;
+		}
+	}
+}
+.info-window {
+	background-color: red;
+}
+.rating{
+	.label-col{
+		width: 80px;
+		display: inline-block;
+	}
+}
+.item-review{
+	margin-bottom: 10px;
+	p{
+		margin: 0 !important;
+	}
+	padding: 20px;
+	border-radius: 5px;
+	overflow: scroll;
+	height: 200px;
+	border: 1px solid grey;
+	width: 250px;
+	display: inline-block;
+}
+.review{
+	overflow: scroll;
+	height: 400px;
+}
+.col-m{
+	margin: 5px 0;
+	width: 100px;
+	height: 10px;
+	background: #F0F0F0;
+	display: inline-block;
+	vertical-align: middle;
+	
+}
+[data-rate^='0'] .col-v {
+  border: 0;
+}
+
+[data-rate^='1'] .col-v {
+  border-left: 20px solid grey;
+}
+
+[data-rate^='2'] .col-v {
+	border-left: 40px solid grey;
+}
+
+[data-rate^='3'] .col-v {
+	border-left: 60px solid grey;
+}
+
+[data-rate^='4'] .col-v {
+	border-left: 80px solid grey;
+}
+
+[data-rate^='5'] .col-v {
+	background: grey;
+}

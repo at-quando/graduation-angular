@@ -1,0 +1,94 @@
+<div class="col-sm-7 padding-right infor-user">
+  <form class="form" #f="ngForm" novalidate (ngSubmit)="editUserInfo(f.value,f.dirty)">
+    <h5>Your Personal Information</h5>
+    <div>
+      <div>
+        <label class="label-info">Your email:</label>
+        <label>{{uid}}</label>
+      </div>
+      <div class="content-avatar clr">
+        <label class="label-info">Your avatar:</label>
+        <cl-image class="avatar-user" public-id="{{user.avatar}}">
+          <cl-transformation height="150" width="150" crop="fill" gravity="faces">
+          </cl-transformation>
+          <!-- <cl-transformation color="#EECCAA" gravity="south" overlay="text:arial_20:Angular" y="20">
+          </cl-transformation> -->
+          <!-- <cl-transformation angle="20">
+          </cl-transformation> -->
+        </cl-image>
+      </div>
+      <div class="change">
+        <label class="label-info">Change avatar:</label>
+        <!-- <span class="btn btn-default btn-file">
+          Browser<input ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" type="file" name="file" id="image">
+        </span> -->
+      </div>
+      <div>
+        <label class="label-info">Your name:</label>
+        <input [(ngModel)]="user.name" class="col-sm-9" type="text" name="name" >
+      </div>
+      <div>
+        <label class="label-info">Your phone number:</label>
+        <input [(ngModel)]="user.phone" class="col-sm-9" type="text" name="phone">
+      </div>
+      <div>
+        <label class="label-info">Your gender:</label>
+        <div class="col-sm-9 margin-right">
+          <input type="radio" name="gender" id="radiomen" value='Male' [(ngModel)]="user.gender" [checked]="user.gender === 'Male'">
+          <label class="radio-btn" for="radio1">
+            Men
+          </label>
+          <input type="radio" name="gender" id="radiowomen" value='Female' [(ngModel)]="user.gender" [checked]="user.gender === 'Female'">
+          <label class="radio-btn" for="radio2">
+            Women
+          </label>
+          <input type="radio" name="gender" id="radioother" value='Other' [(ngModel)]="user.gender" [checked]="user.gender === 'Other'">
+          <label class="radio-btn" for="radio3">
+            Other
+          </label>
+        </div>
+      </div>
+      <div>
+        <label class="label-info">Your address</label>
+        <input [(ngModel)]="user.address" class="col-sm-9" type="text" name="address">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+<div class="col-sm-5 wish-list-contain">
+  <h5>Wish list</h5>
+  <ul class="wish-list">
+    <li>
+      <a>
+        <img class="col-sm-5" src="http://az616578.vo.msecnd.net/files/2016/09/17/636096742373357996142416222_fashion-beauty-tips.jpg">
+        <div class="col-sm-7 margin-right">
+          <h6>name of product</h6>
+          <p>dess¥cription</p>
+          <p>$30</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a>
+        <img class="col-sm-5" src="http://az616578.vo.msecnd.net/files/2016/09/17/636096742373357996142416222_fashion-beauty-tips.jpg">
+        <div class="col-sm-7 margin-right">
+          <h6>name of product</h6>
+          <p>dess¥cription</p>
+          <p>$30</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a>
+        <img class="col-sm-5" src="http://az616578.vo.msecnd.net/files/2016/09/17/636096742373357996142416222_fashion-beauty-tips.jpg">
+        <div class="col-sm-7 margin-right">
+          <h6>name of product</h6>
+          <p>dess¥cription</p>
+          <p>$30</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <a href="" class="margin-right">SEE MORE</a>
+</div>

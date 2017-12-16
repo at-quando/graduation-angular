@@ -1,0 +1,76 @@
+#signup {
+	.input-half {
+		width: 50%;
+		float: left;
+	}
+}
+::-webkit-input-placeholder { /* Chrome */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: black;
+}
+h6 {
+	padding-top: 20px;
+}
+.nav-account {
+	margin-top: 20px;
+	a {
+		cursor: pointer;
+		padding: 0 20px;
+		font-size: 17px;
+		color: black;
+		border: 1px solid black;
+	}
+	.actived {
+		border: 1px solid orange;
+		color: orange !important;
+	}
+}
+
+.input-group {
+	margin-bottom: 10px;
+}
+small {
+	font-size: 14px;
+}
+
+.modal-dialog {
+	height: 80% !important;
+}
+.input-group-addon{
+  background-color: rgba(0, 0, 0, .16) !important;
+}
+.input-custom{
+  background-color: rgba(0, 0, 0, .16) !important;
+}
+.social{
+  padding-bottom: 15px;
+  .circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    color: white;
+    font-size: 20px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .google {
+    background-color: #F74933;
+  }
+  .facebook {
+    background-color: #6E83CD;
+  }
+  .twitter {
+    background-color: #00A4E4;
+  }
+  .fa-fw{
+    padding-top: 15px;
+  }
+}

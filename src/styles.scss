@@ -1,0 +1,18 @@
+.replace-nav #cat-aside .panel .panel-heading{
+  .title-panel {
+    margin-bottom: 5px !important;
+    a{
+    font-size: 14px;
+    padding-left: 5px;
+    }
+  }
+}
+
+.replace-nav>#cat-aside>.panel>.panel-heading>.title-panel{
+  background-color: grey;
+  a{
+    text-transform: uppercase;
+  }
+}
+
+

@@ -1,0 +1,8 @@
+<ul class="navbar-nav">
+  <li *ngFor="let objbrand of brands">
+    <a [routerLink]="['/', title, { brand_id: objbrand.brand.id }]"> 
+      <span class="pull-right">(<span class="count-product">{{objbrand.brand.count}}</span>)</span>
+      {{objbrand.brand.branch}}
+    </a>
+  </li>
+</ul>

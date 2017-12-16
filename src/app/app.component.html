@@ -1,0 +1,178 @@
+<app-login></app-login>
+<div class="compare-button" (click)="openPanel()">
+  <i class="fa fa-cog" aria-hidden="true"></i>
+</div>
+<div *ngIf="isOpen" class="compare-panel">
+  <ul *ngIf="comparedProduct" class="category-list">
+    <li class="category-item" *ngFor="let item of comparedProduct">
+      <div class="border-item">
+        <!-- <span class="sale-box" [saleProduct]="item.properties">
+          <span class="label-sale">SALE</span>
+        </span> -->
+        <a [routerLink]="['/',item.category.title,item.id]" (click)="topPage()">
+          <div class="category-item-picture" *ngIf="item.properties[0].images.length==0 ||item.properties.length==0">
+            <img src="http://cdn.shopify.com/s/files/1/1137/0048/t/2/assets/slideshow_image_1.jpg?1928721178739775374" style="height: 100px" class="image-panel" >
+          </div>
+          <div class="category-item-picture" *ngIf="item.properties[0].images.length!=0">
+            <cl-image class="image-panel" public-id="{{item.properties[0].images[0].image}}" style="height: 100px" >
+            </cl-image>
+          </div>
+        </a>
+        <hr class="small">
+        <div class="category-item-info">
+          <div class="product-name">
+            <p class="item-name" *ngIf="item.name">{{item.name}}</p>
+          </div>
+          <div *ngIf="item.properties[0].discount" class="product-price">
+            <span class="old-price">${{item.properties[0].price}}</span>
+            <span class="new-price">${{item.properties[0].price*item.properties[0].discount.sale}}</span>
+          </div>
+          <div *ngIf="!item.properties[0].discount" class="product-price">
+              <span class="new-price">${{item.properties[0].price}}</span>
+            </div>
+        </div>
+        <div class="add-to-cart-btn">
+          <a class="add-to-cart" (click)="add_to_cart(item, 1)">
+            <i class="now-ui-icons shopping_cart-simple"></i>
+            ADD TO CART
+          </a>
+          <div class="rating">
+            <star-review [type]=0 [rate]="item.rating.toString()"></star-review>
+          </div>
+          <p *ngIf="item.properties[0].storage!=null">{{item.properties[0].storage}} GB</p>
+          <p *ngIf="item.properties[0].size!=null">{{item.properties[0].size}}</p>
+          <p *ngIf="item.brand!=null">{{item.brand.branch}}</p>
+          <p *ngIf="!item.brand">unknown</p>
+          <p *ngIf="item.category">{{item.category.title}}</p>
+          <p *ngIf="!item.category">unknown</p>
+          <p *ngIf="item.number_review">{{item.number_review}} reviews</p>
+          <!-- <p>item.properties[0].price</p>  -->
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<div scroll="no" id="loading" class="loader-container">
+  <div class="loader"></div>
+</div>
+<nav id="navbar" class="navbar border-nav navbar-inverse navbar-toggleable-md fixed-top bg-white">
+  <div class="navbar-translate">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+    </button>
+  </div>
+  <div class="full-width">
+    <a href="#pablo">
+      <img src="assets/img/logofanatic.png" class="brand-name" style="background: white;">
+    </a>
+    <ol class="navbar-nav collapse navbar-collapse">
+      <li class="nav-item">
+        <a class="nav-link">
+          Market
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['./shop']" (click)="topPage()">
+          Shop Owner
+        </a>
+      </li>
+    </ol>
+    <div class="third-navbar">
+      <ul class="navbar-nav justify-content-end collapse">
+        <li class="nav-item nav-item-right dropdown" [appNavUser]="{name: name, avatar: avatar}">
+          <a class="nav-link" href="#pablo" data-toggle="dropdown" id="navbarDropdownMenuLink1">
+            <i class="now-ui-icons users_single-02"></i>
+            <span class="now-ui-icons arrows-1_minimal-down"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1" id="dropdown-user">
+            <span class="dropdown-item">Login as...</span>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="loginForm()"><i class="now-ui-icons ui-1_email-85 nav-icon"></i>Email</a>
+            <a class="dropdown-item" (click)="loginFacebook()"><i class="fa fa-facebook nav-icon"></i>Facebook</a>
+            <a class="dropdown-item" (click)="gotoGoogle()"><i class="fa fa-google nav-icon"></i>Google</a>
+          </ul>
+          <ul class="dropdown-menu user-menu" aria-labelledby="navbarDropdownMenuLink1" id="dropdown-user-login" style="top: 30px">
+            <span class="dropdown-item">{{uid}}</span>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="['/customer/info']" [queryParams]="{id: id}"><i class="now-ui-icons design_bullet-list-67"></i> Information</a>
+            <a class="dropdown-item" [routerLink]="['/customer/history']"><i class="now-ui-icons shopping_bag-16"></i> My History</a>
+            <a class="dropdown-item" (click)="logout()"><i class="now-ui-icons loader_gear"></i> Log Out</a>
+          </ul>
+        </li>
+        <li class="nav-item nav-item-right shopping-cart-effect">
+          <a class="nav-link shopping-cart" [routerLink]="['/order']">
+            <i class="now-ui-icons shopping_cart-simple my-cart">
+              <span class="number-item">{{numberItem()}}</span>
+            </i>
+            <p>MY CART</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <hr class="small">
+    <div>
+      <ul class="second-nav navbar-nav collapse navbar-collapse aside-nav">
+        <h5 style="margin-bottom: 0; margin-top: 10px; color: white">CATEGORIES</h5>
+        <div *ngIf="categoriesAside">
+          <aside-tree class="nav-item active dropdown replace-nav" [datas]="categoriesAside"></aside-tree>
+        </div>
+        <li class="nav-item active dropdown origin-nav" *ngFor="let mainCategory of categories | keys">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdownCategory">{{mainCategory}}</a>
+          <ul class="dropdown-menu dropdown-category" aria-labelledby="dropdownCategory">
+            <ul class="collection-item">
+              COLLECTION
+              <hr class="small">
+              <li class="sub-category">New Release</li>
+              <li class="sub-category">Launch Calendar</li>
+              <li class="sub-category">Best Seller</li>
+              <li class="sub-category">Basic</li>
+              <li class="sub-category">Sell</li>
+              <li class="sub-category">City Hunter</li>
+            </ul>
+            <li class="category-item" *ngFor="let subCategory of categories[mainCategory] | keys">
+              <a class="sub-category"><span >{{subCategory}}</span></a>
+              <hr class="small">
+              <div id="ui-tree">
+                <app-ui-tree [data]="categories[mainCategory][subCategory]" [key]="key"></app-ui-tree>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="second-nav-right">
+        <div class="col-md-12">
+          <div class="input-group form-group-no-border search-content">
+            <input #searchSomething type="text" class="form-control search-input" id="searchInput" placeholder="Search something" [ngModel]="search" (ngModelChange)="somethingSearch($event)" (focus)="enableSearch()" (keydown)="showListSearch($event)">
+            <ul class="search-name" (click)="disableSearch()">
+              <li class="search-item search-item-not-found" *ngIf="searchName?.length === 0 && search !== null">
+                <p class="title-not-found"> No Item Found </p>
+              </li>
+              <li *ngFor="let nameSearch of searchName" class="search-item">
+                <div class="infor-search clr">
+                  <a class="success-active" [routerLink]="['/', nameSearch.category.title, nameSearch.id]">
+                    <img class="image-search" src="http://res.cloudinary.com/asian-tech/image/upload/{{nameSearch.properties[0].images[0].image}}">
+                    <span class="name-price-search">
+                      <span class="search-name-product">{{nameSearch.name}}</span>
+                      <p class="search-price-product">${{nameSearch.properties[0].price}}</p>
+                    </span>
+                  </a>
+                </div>
+              </li>
+            </ul>
+            <span class="input-group-addon">
+              <i class="now-ui-icons ui-1_zoom-bold"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<notification></notification>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+<!--  Signup login!-->
+<app-footer></app-footer>

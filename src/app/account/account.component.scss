@@ -1,0 +1,27 @@
+.container-side {
+  padding: 50px 0;
+}
+
+.list-user-action {
+  list-style-type: none;
+  padding: 0;
+  li {
+    border: 1px solid grey;
+    padding: 10px;
+  }
+  .active{
+    background-color: grey;
+    color: white;
+  }
+}
+
+.side-bar {
+  float: left;
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.infor-user {
+  float: left;
+}
